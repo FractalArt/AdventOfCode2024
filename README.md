@@ -9,6 +9,8 @@ My solutions to the [AOC 2024](https://adventofcode.com/2024) problems in [Rust]
 |  1 | :heavy_check_mark: | :heavy_check_mark: |  
 |  2 | :heavy_check_mark: | :heavy_check_mark: |  
 |  3 | :heavy_check_mark: | :heavy_check_mark: |  
+|  4 | :heavy_check_mark: | :x: |  
+
 ***
 
 ## Organization
