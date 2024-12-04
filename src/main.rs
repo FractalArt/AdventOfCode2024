@@ -39,5 +39,8 @@ fn main() {
         "[Day 04 - Task 1]: {}",
         format!("{}", aoc2024::day_04::day_04_1(&data_04)).green()
     );
-    println!("[Day 04 - Task 2]: {}", format!("{}", aoc2024::day_04::day_04_2(&data_04)).green());
+    println!(
+        "[Day 04 - Task 2]: {}",
+        format!("{}", aoc2024::day_04::day_04_2(&data_04)).green()
+    );
 }
