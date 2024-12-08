@@ -50,7 +50,7 @@ fn main() {
         format!("{}", aoc2024::day_05::day_05_1(&data_05)).green()
     );
     //println!(
-        //"[Day 05 - Task 2]: {}",
-        //format!("{}", aoc2024::day_05::day_05_2(&data_05)).green()
+    //"[Day 05 - Task 2]: {}",
+    //format!("{}", aoc2024::day_05::day_05_2(&data_05)).green()
     //);
 }

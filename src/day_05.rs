@@ -5,26 +5,27 @@ use std::collections::HashMap as HM;
 
 fn parse_input(data: &[String]) -> (HM<usize, Vec<usize>>, Vec<Vec<usize>>) {
     let rules = data
-        .as_ref()
         .iter()
         .take_while(|s| !s.is_empty())
-        .map(|s| s.split('|').collect::<Vec<_>>())
-        .map(|v| {
+        .map(|s| {
+            let mut split = s.split('|');
             (
-                v[0].parse::<usize>().unwrap(),
-                v[1].parse::<usize>().unwrap(),
+                split.next().unwrap().parse::<usize>().unwrap(),
+                split.next().unwrap().parse::<usize>().unwrap(),
             )
         })
-        .fold(HM::<usize, Vec<_>>::new(), |mut acc, (x, y)| {
-            acc.entry(x).or_default().push(y);
+        .fold(HM::<usize, Vec<_>>::new(), |mut acc, (key, val)| {
+            acc.entry(key).or_default().push(val);
             acc
         });
+
     let page_numbers = data
         .iter()
         .skip_while(|s| !s.is_empty())
         .skip(1)
         .map(|s| s.split(",").map(|i| i.parse::<usize>().unwrap()).collect())
         .collect();
+
     (rules, page_numbers)
 }
 
@@ -34,20 +35,11 @@ pub fn day_05_1(data: &[String]) -> usize {
     page_numbers
         .iter()
         .filter(|pn| {
-            //pn.iter()
-                //.enumerate()
-                //.flat_map(|(i, n)| pn[..i].iter().map(|x| rules.contains_key(&n.clone()) && rules[&n.clone()].contains(x)))
-                //.any(|b| !b)
-            for (i, n) in pn.iter().enumerate() {
-                let before = &pn[..i];
-                for b in before {
-                    if rules.contains_key(n) && rules[n].contains(b) {
-                        return false
-                    }
-                }
-
-            }
-            true
+            pn.iter().enumerate().all(|(i, n)| {
+                !pn[..i]
+                    .iter()
+                    .any(|b| rules.get(n).unwrap_or(&vec![]).contains(b))
+            })
         })
         .map(|pn| pn[pn.len() / 2])
         .sum()
