@@ -120,7 +120,6 @@ pub fn part_2(data: &[String]) -> usize {
                         } else {
                             visited.insert(entry);
                         }
-                        visited.insert((guard.coord, guard.direction));
                     } else {
                         break false;
                     }
