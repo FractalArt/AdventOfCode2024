@@ -43,4 +43,14 @@ fn main() {
         "[Day 04 - Task 2]: {}",
         format!("{}", aoc2024::day_04::day_04_2(&data_04)).green()
     );
+    // day 05
+    let data_05 = read_data::<String, _>("data/day_05.txt").unwrap();
+    println!(
+        "[Day 05 - Task 1]: {}",
+        format!("{}", aoc2024::day_05::day_05_1(&data_05)).green()
+    );
+    //println!(
+        //"[Day 05 - Task 2]: {}",
+        //format!("{}", aoc2024::day_05::day_05_2(&data_05)).green()
+    //);
 }
