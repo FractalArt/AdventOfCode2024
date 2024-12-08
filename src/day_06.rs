@@ -5,6 +5,7 @@ use std::collections::HashSet as HS;
 
 type Coord = (isize, isize);
 
+#[derive(Default)]
 struct Guard {
     coord: Coord,
     direction: Coord,
@@ -55,13 +56,13 @@ impl Guard {
 
 /// The solution to task 1 of day 6.
 pub fn part_1(data: &[String]) -> usize {
-    let (obstacles, guard, (dim_x, dim_y)) = data.iter().enumerate().fold(
-        (vec![], None, (0, 0)),
+    let (obstacles, mut guard, (dim_x, dim_y)) = data.iter().enumerate().fold(
+        (vec![], Guard::default(), (0, 0)),
         |(mut obstacles, mut guard, mut dim), (y, line)| {
             line.chars().enumerate().for_each(|(x, c)| {
                 match c {
                     '^' | 'v' | '>' | '<' => {
-                        guard = Some(Guard::new((x as isize, y as isize), c));
+                        guard = Guard::new((x as isize, y as isize), c);
                     }
                     '#' => obstacles.push((x as isize, y as isize)),
                     _ => {}
@@ -72,33 +73,25 @@ pub fn part_1(data: &[String]) -> usize {
         },
     );
 
-    let mut guard = guard.unwrap();
+    let mut positions = [guard.coord].into_iter().collect::<HS<(_,_)>>();
 
-    let mut positions = HS::new();
-    positions.insert(guard.coord);
-
-    let mut is_in = true;
-    //let mut count = 0;
-    while is_in {
-        //count += 1;
-        //if count > 250 {panic!("O-o");}
-        //dbg!(guard.coord);
-        let next = guard.next();
-        if obstacles.contains(&next) {
+    loop {
+        if obstacles.contains(&guard.next()) {
             guard.turn();
         } else {
             guard.step();
-            is_in = guard.coord.0 >= 0
+            if guard.coord.0 >= 0
                 && guard.coord.0 <= dim_x
                 && guard.coord.1 >= 0
-                && guard.coord.1 <= dim_y;
-            if is_in {
+                && guard.coord.1 <= dim_y
+            {
                 positions.insert(guard.coord);
+            } else {
+                break positions.len();
             }
         }
     }
 
-    positions.len()
 }
 
 ///// The solution to task 2 of day 6.
