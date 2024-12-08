@@ -60,7 +60,7 @@ fn main() {
         format!("{}", aoc2024::day_06::part_1(&data)).green()
     );
     println!(
-    "[Day 06 - Task 2]: {}",
-    format!("{}", aoc2024::day_06::part_2(&data)).green()
+        "[Day 06 - Task 2]: {}",
+        format!("{}", aoc2024::day_06::part_2(&data)).green()
     );
 }
