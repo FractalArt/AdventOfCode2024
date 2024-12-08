@@ -94,10 +94,93 @@ pub fn part_1(data: &[String]) -> usize {
 
 }
 
-///// The solution to task 2 of day 6.
-//pub fn part_2(data: &[String]) -> usize {
-//3
-//}
+/// The solution to task 2 of day 6.
+pub fn part_2(data: &[String]) -> usize {
+    
+    // Parse the data
+    let (obstacles, mut guard, (dim_x, dim_y)) = data.iter().enumerate().fold(
+        (vec![], Guard::default(), (0, 0)),
+        |(mut obstacles, mut guard, mut dim), (y, line)| {
+            line.chars().enumerate().for_each(|(x, c)| {
+                match c {
+                    '^' | 'v' | '>' | '<' => {
+                        guard = Guard::new((x as isize, y as isize), c);
+                    }
+                    '#' => obstacles.push((x as isize, y as isize)),
+                    _ => {}
+                }
+                dim = (x as isize, y as isize);
+            });
+            (obstacles, guard, dim)
+        },
+    );
+
+    let start_pos = guard.coord;
+    let start_dir = guard.direction;
+
+    // Compute all the positions that the guard would visit
+
+    let mut positions = [guard.coord].into_iter().collect::<HS<(_,_)>>();
+
+    loop {
+        if obstacles.contains(&guard.next()) {
+            guard.turn();
+        } else {
+            guard.step();
+            if guard.coord.0 >= 0
+                && guard.coord.0 <= dim_x
+                && guard.coord.1 >= 0
+                && guard.coord.1 <= dim_y
+            {
+                positions.insert(guard.coord);
+            } else {
+                break;
+            }
+        }
+    }
+
+    // Now try to place an obstacle in every place the guard visited and check if it leads to a
+    // loop
+    let mut loop_counter = 0usize;
+    for (obs_x, obs_y) in positions {
+        if (obs_x, obs_y) == start_pos {
+            continue;
+        }
+        let mut new_obstacles = obstacles.clone();
+        new_obstacles.push((obs_x, obs_y));
+
+        guard.coord = start_pos;
+        guard.direction = start_dir;
+        let mut visited = [(guard.coord, guard.direction)].into_iter().collect::<HS<(Coord, Coord)>>();
+
+        loop {
+            if new_obstacles.contains(&guard.next()) {
+                guard.turn();
+            } else {
+                guard.step();
+                if guard.coord.0 >= 0
+                    && guard.coord.0 <= dim_x
+                    && guard.coord.1 >= 0
+                    && guard.coord.1 <= dim_y
+                {
+                    let entry = (guard.coord, guard.direction);
+                    if visited.contains(&entry) {
+                        loop_counter += 1;
+                        break;
+                    } else {
+                        visited.insert(entry);
+                    }
+                    visited.insert((guard.coord, guard.direction));
+                } else {
+                    break;
+                }
+            }
+        }
+
+    }
+
+    loop_counter
+}
 
 #[cfg(test)]
 mod tests {
@@ -120,20 +203,20 @@ mod tests {
         assert_eq!(part_1(&data), 41);
     }
 
-    //#[test]
-    //fn test_part_2() {
-    //let data = [
-    //"....#.....".to_string(),
-    //".........#".to_string(),
-    //"..........".to_string(),
-    //"..#.......".to_string(),
-    //".......#..".to_string(),
-    //"..........".to_string(),
-    //".#..^.....".to_string(),
-    //"........#.".to_string(),
-    //"#.........".to_string(),
-    //"......#...".to_string(),
-    //];
-    //assert_eq!(part_2(&data), 143);
-    //}
+    #[test]
+    fn test_part_2() {
+    let data = [
+    "....#.....".to_string(),
+    ".........#".to_string(),
+    "..........".to_string(),
+    "..#.......".to_string(),
+    ".......#..".to_string(),
+    "..........".to_string(),
+    ".#..^.....".to_string(),
+    "........#.".to_string(),
+    "#.........".to_string(),
+    "......#...".to_string(),
+    ];
+    assert_eq!(part_2(&data), 6);
+    }
 }
