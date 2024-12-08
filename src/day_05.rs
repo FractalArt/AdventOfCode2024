@@ -57,7 +57,7 @@ fn parse_input(data: &[String]) -> (HM<usize, Vec<usize>>, Vec<Vec<usize>>) {
 }
 
 /// The solution to task 1 of day 5.
-pub fn day_05_1(data: &[String]) -> usize {
+pub fn part_1(data: &[String]) -> usize {
     let (rules, page_numbers) = parse_input(data);
     page_numbers
         .iter()
@@ -67,7 +67,7 @@ pub fn day_05_1(data: &[String]) -> usize {
 }
 
 /// The solution to task 2 of day 5.
-pub fn day_05_2(data: &[String]) -> usize {
+pub fn part_2(data: &[String]) -> usize {
     let (rules, page_numbers) = parse_input(data);
     page_numbers
         .iter()
@@ -82,7 +82,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_day_05_1() {
+    fn test_part_1() {
         let data = [
             "47|53".to_string(),
             "97|13".to_string(),
@@ -113,11 +113,11 @@ mod tests {
             "61,13,29".to_string(),
             "97,13,75,29,47".to_string(),
         ];
-        assert_eq!(day_05_1(&data), 143);
+        assert_eq!(part_1(&data), 143);
     }
 
     #[test]
-    fn test_day_05_2() {
+    fn test_part_2() {
         let data = [
             "47|53".to_string(),
             "97|13".to_string(),
@@ -148,6 +148,6 @@ mod tests {
             "61,13,29".to_string(),
             "97,13,75,29,47".to_string(),
         ];
-        assert_eq!(day_05_2(&data), 123);
+        assert_eq!(part_2(&data), 123);
     }
 }

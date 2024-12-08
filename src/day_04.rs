@@ -31,7 +31,7 @@ impl Grid {
 }
 
 /// The solution to task 1 of day 4.
-pub fn day_04_1(data: &[String]) -> usize {
+pub fn part_1(data: &[String]) -> usize {
     let directions = [
         (0, 1),
         (1, 0),
@@ -72,7 +72,7 @@ pub fn day_04_1(data: &[String]) -> usize {
 }
 
 /// The solution to task 2 of day 4.
-pub fn day_04_2(data: &[String]) -> usize {
+pub fn part_2(data: &[String]) -> usize {
     let grid = Grid::new(data);
     grid.char_positions('A')
         .iter()
@@ -94,7 +94,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_day_04_1() {
+    fn test_part_1() {
         let data = [
             "MMMSXXMASM".to_string(),
             "MSAMXMSMSA".to_string(),
@@ -107,11 +107,11 @@ mod tests {
             "MAMMMXMMMM".to_string(),
             "MXMXAXMASX".to_string(),
         ];
-        assert_eq!(day_04_1(&data), 18);
+        assert_eq!(part_1(&data), 18);
     }
 
     #[test]
-    fn test_day_04_2() {
+    fn test_part_2() {
         let data = [
             "MMMSXXMASM".to_string(),
             "MSAMXMSMSA".to_string(),
@@ -124,6 +124,6 @@ mod tests {
             "MAMMMXMMMM".to_string(),
             "MXMXAXMASX".to_string(),
         ];
-        assert_eq!(day_04_2(&data), 9);
+        assert_eq!(part_2(&data), 9);
     }
 }

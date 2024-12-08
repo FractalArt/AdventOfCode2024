@@ -54,12 +54,12 @@ impl Guard {
 }
 
 /// The solution to task 1 of day 6.
-pub fn day_06_1(data: &[String]) -> usize {
-    let (obstacles, guard, (dim_x, dim_y)) =
-        data.iter()
-            .enumerate()
-            .fold((vec![], None, (0, 0)), |(mut obstacles, mut guard, mut dim), (y, line)| {
-                line.chars().enumerate().for_each(|(x, c)| {match c {
+pub fn part_1(data: &[String]) -> usize {
+    let (obstacles, guard, (dim_x, dim_y)) = data.iter().enumerate().fold(
+        (vec![], None, (0, 0)),
+        |(mut obstacles, mut guard, mut dim), (y, line)| {
+            line.chars().enumerate().for_each(|(x, c)| {
+                match c {
                     '^' | 'v' | '>' | '<' => {
                         guard = Some(Guard::new((x as isize, y as isize), c));
                     }
@@ -67,9 +67,10 @@ pub fn day_06_1(data: &[String]) -> usize {
                     _ => {}
                 }
                 dim = (x as isize, y as isize);
-                });
-                (obstacles, guard, dim)
             });
+            (obstacles, guard, dim)
+        },
+    );
 
     let mut guard = guard.unwrap();
 
@@ -87,7 +88,10 @@ pub fn day_06_1(data: &[String]) -> usize {
             guard.turn();
         } else {
             guard.step();
-            is_in = guard.coord.0 >= 0 && guard.coord.0 <= dim_x && guard.coord.1 >= 0 && guard.coord.1 <= dim_y;
+            is_in = guard.coord.0 >= 0
+                && guard.coord.0 <= dim_x
+                && guard.coord.1 >= 0
+                && guard.coord.1 <= dim_y;
             if is_in {
                 positions.insert(guard.coord);
             }
@@ -98,7 +102,7 @@ pub fn day_06_1(data: &[String]) -> usize {
 }
 
 ///// The solution to task 2 of day 6.
-//pub fn day_05_2(data: &[String]) -> usize {
+//pub fn part_2(data: &[String]) -> usize {
 //3
 //}
 
@@ -107,7 +111,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_day_06_1() {
+    fn test_part_1() {
         let data = [
             "....#.....".to_string(),
             ".........#".to_string(),
@@ -120,11 +124,11 @@ mod tests {
             "#.........".to_string(),
             "......#...".to_string(),
         ];
-        assert_eq!(day_06_1(&data), 41);
+        assert_eq!(part_1(&data), 41);
     }
 
     //#[test]
-    //fn test_day_06_2() {
+    //fn test_part_2() {
     //let data = [
     //"....#.....".to_string(),
     //".........#".to_string(),
@@ -137,6 +141,6 @@ mod tests {
     //"#.........".to_string(),
     //"......#...".to_string(),
     //];
-    //assert_eq!(day_06_2(&data), 143);
+    //assert_eq!(part_2(&data), 143);
     //}
 }

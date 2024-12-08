@@ -4,7 +4,7 @@
 use regex::Regex;
 
 /// The solution to task 1 of day 3.
-pub fn day_03_1(mem: &str) -> u32 {
+pub fn part_1(mem: &str) -> u32 {
     let re = Regex::new(r"mul\((\d{1,3}),(\d{1,3})\)").unwrap();
     re.captures_iter(mem)
         .map(|c| {
@@ -23,7 +23,7 @@ pub fn day_03_1(mem: &str) -> u32 {
 }
 
 /// The solution to task 2 of day 3.
-pub fn day_03_2(mem: &str) -> u32 {
+pub fn part_2(mem: &str) -> u32 {
     let re = Regex::new(r"mul\((?P<x>\d{1,3}),(?P<y>\d{1,3})\)|(?P<dont>don't\(\))|(?P<do>do\(\))")
         .unwrap();
     re.captures_iter(mem)
@@ -78,16 +78,16 @@ mod tests {
     }
 
     #[test]
-    fn test_day_03_1() {
+    fn test_part_1() {
         let data =
             "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))".to_string();
-        assert_eq!(day_03_1(&data), 161);
+        assert_eq!(part_1(&data), 161);
     }
 
     #[test]
-    fn test_day_03_2() {
+    fn test_part_2() {
         let data =
             "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))".to_string();
-        assert_eq!(day_03_2(&data), 48);
+        assert_eq!(part_2(&data), 48);
     }
 }

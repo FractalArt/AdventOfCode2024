@@ -4,7 +4,7 @@
 use std::collections::HashMap as HM;
 
 /// The solution to task 1 of day 1.
-pub fn day_01_1(data: &[String]) -> i32 {
+pub fn part_1(data: &[String]) -> i32 {
     let (mut v1, mut v2) = data
         .iter()
         .map(|s| s.split_once("   ").unwrap())
@@ -26,7 +26,7 @@ pub fn day_01_1(data: &[String]) -> i32 {
 }
 
 /// The solution to task 2 of day 1.
-pub fn day_01_2(data: &[String]) -> u32 {
+pub fn part_2(data: &[String]) -> u32 {
     let (v, hm) = data
         .iter()
         .map(|s| s.split_once("   ").unwrap())
@@ -49,7 +49,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_day_01_1() {
+    fn test_part_1() {
         let data = [
             "3   4".to_string(),
             "4   3".to_string(),
@@ -58,11 +58,11 @@ mod tests {
             "3   9".to_string(),
             "3   3".to_string(),
         ];
-        assert_eq!(day_01_1(&data), 11);
+        assert_eq!(part_1(&data), 11);
     }
 
     #[test]
-    fn test_day_01_2() {
+    fn test_part_2() {
         let data = [
             "3   4".to_string(),
             "4   3".to_string(),
@@ -71,6 +71,6 @@ mod tests {
             "3   9".to_string(),
             "3   3".to_string(),
         ];
-        assert_eq!(day_01_2(&data), 31);
+        assert_eq!(part_2(&data), 31);
     }
 }

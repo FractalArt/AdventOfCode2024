@@ -40,7 +40,7 @@ fn try_fix(report: &[i32]) -> bool {
 }
 
 /// The solution to task 1 of day 2.
-pub fn day_02_1(data: &[String]) -> usize {
+pub fn part_1(data: &[String]) -> usize {
     data.iter()
         .map(|report| {
             valid_report(
@@ -55,7 +55,7 @@ pub fn day_02_1(data: &[String]) -> usize {
 }
 
 /// The solution to task 2 of day 2.
-pub fn day_02_2(data: &[String]) -> usize {
+pub fn part_2(data: &[String]) -> usize {
     data.iter()
         .map(|report| {
             let report: Vec<_> = report
@@ -76,7 +76,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_day_02_1() {
+    fn test_part_1() {
         let data = [
             "7 6 4 2 1".to_string(),
             "1 2 7 8 9".to_string(),
@@ -85,7 +85,7 @@ mod tests {
             "8 6 4 4 1".to_string(),
             "1 3 6 7 9".to_string(),
         ];
-        assert_eq!(day_02_1(&data), 2);
+        assert_eq!(part_1(&data), 2);
     }
 
     #[test]
@@ -107,7 +107,7 @@ mod tests {
     }
 
     #[test]
-    fn test_day_02_2() {
+    fn test_part_2() {
         let data = [
             "7 6 4 2 1".to_string(),
             "1 2 7 8 9".to_string(),
@@ -116,6 +116,6 @@ mod tests {
             "8 6 4 4 1".to_string(),
             "1 3 6 7 9".to_string(),
         ];
-        assert_eq!(day_02_2(&data), 4);
+        assert_eq!(part_2(&data), 4);
     }
 }

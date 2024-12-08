@@ -4,63 +4,63 @@ use std::fs;
 
 fn main() {
     // day 01
-    let data_01 = read_data::<String, _>("data/day_01.txt").unwrap();
+    let data = read_data::<String, _>("data/day_01.txt").unwrap();
     println!(
         "[Day 01 - Task 1]: {}",
-        format!("{}", aoc2024::day_01::day_01_1(&data_01)).green()
+        format!("{}", aoc2024::day_01::part_1(&data)).green()
     );
     println!(
         "[Day 01 - Task 2]: {}",
-        format!("{}", aoc2024::day_01::day_01_2(&data_01)).green()
+        format!("{}", aoc2024::day_01::part_2(&data)).green()
     );
     // day 02
-    let data_02 = read_data::<String, _>("data/day_02.txt").unwrap();
+    let data = read_data::<String, _>("data/day_02.txt").unwrap();
     println!(
         "[Day 02 - Task 1]: {}",
-        format!("{}", aoc2024::day_02::day_02_1(&data_02)).green()
+        format!("{}", aoc2024::day_02::part_1(&data)).green()
     );
     println!(
         "[Day 02 - Task 2]: {}",
-        format!("{}", aoc2024::day_02::day_02_2(&data_02)).green()
+        format!("{}", aoc2024::day_02::part_2(&data)).green()
     );
     // day 03
-    let data_03 = fs::read_to_string("data/day_03.txt").unwrap();
+    let data = fs::read_to_string("data/day_03.txt").unwrap();
     println!(
         "[Day 03 - Task 1]: {}",
-        format!("{}", aoc2024::day_03::day_03_1(&data_03)).green()
+        format!("{}", aoc2024::day_03::part_1(&data)).green()
     );
     println!(
         "[Day 03 - Task 2]: {}",
-        format!("{}", aoc2024::day_03::day_03_2(&data_03)).green()
+        format!("{}", aoc2024::day_03::part_2(&data)).green()
     );
     // day 04
-    let data_04 = read_data::<String, _>("data/day_04.txt").unwrap();
+    let data = read_data::<String, _>("data/day_04.txt").unwrap();
     println!(
         "[Day 04 - Task 1]: {}",
-        format!("{}", aoc2024::day_04::day_04_1(&data_04)).green()
+        format!("{}", aoc2024::day_04::part_1(&data)).green()
     );
     println!(
         "[Day 04 - Task 2]: {}",
-        format!("{}", aoc2024::day_04::day_04_2(&data_04)).green()
+        format!("{}", aoc2024::day_04::part_2(&data)).green()
     );
     // day 05
-    let data_05 = read_data::<String, _>("data/day_05.txt").unwrap();
+    let data = read_data::<String, _>("data/day_05.txt").unwrap();
     println!(
         "[Day 05 - Task 1]: {}",
-        format!("{}", aoc2024::day_05::day_05_1(&data_05)).green()
+        format!("{}", aoc2024::day_05::part_1(&data)).green()
     );
     println!(
         "[Day 05 - Task 2]: {}",
-        format!("{}", aoc2024::day_05::day_05_2(&data_05)).green()
+        format!("{}", aoc2024::day_05::part_2(&data)).green()
     );
     // day 06
-    let data_06 = read_data::<String, _>("data/day_06.txt").unwrap();
+    let data = read_data::<String, _>("data/day_06.txt").unwrap();
     println!(
         "[Day 06 - Task 1]: {}",
-        format!("{}", aoc2024::day_06::day_06_1(&data_06)).green()
+        format!("{}", aoc2024::day_06::part_1(&data)).green()
     );
     //println!(
-        //"[Day 06 - Task 2]: {}",
-        //format!("{}", aoc2024::day_06::day_06_2(&data_06)).green()
+    //"[Day 06 - Task 2]: {}",
+    //format!("{}", aoc2024::day_06::part_2(&data)).green()
     //);
 }
