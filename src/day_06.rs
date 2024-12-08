@@ -2,6 +2,7 @@
 //!
 //! This module contains the solution of the [sixth day's challenges](https://adventofcode.com/2024/day/6).
 use std::collections::HashSet as HS;
+use rayon::prelude::*;
 
 type Coord = (isize, isize);
 
@@ -12,8 +13,8 @@ struct Guard {
 }
 
 impl Guard {
-    fn new(coord: Coord, direction: char) -> Self {
-        match direction {
+    fn new(coord: Coord, symbol: char) -> Self {
+        match symbol {
             '^' => Self {
                 coord,
                 direction: (0, -1),
@@ -138,48 +139,47 @@ pub fn part_2(data: &[String]) -> usize {
             }
         }
     }
-
     // Now try to place an obstacle in every place the guard visited and check if it leads to a
     // loop
-    let mut loop_counter = 0usize;
-    for (obs_x, obs_y) in positions {
-        if (obs_x, obs_y) == start_pos {
-            continue;
-        }
-        let mut new_obstacles = obstacles.clone();
-        new_obstacles.push((obs_x, obs_y));
+    
+    // loop over all new obstacle positions
+    positions.into_par_iter()
+        // filter out those that give loops
+        .filter(|new_obs| {
+            // simulate
+            let mut guard = Guard::default();
+            guard.coord = start_pos;
+            guard.direction = start_dir;
 
-        guard.coord = start_pos;
-        guard.direction = start_dir;
-        let mut visited = [(guard.coord, guard.direction)].into_iter().collect::<HS<(Coord, Coord)>>();
+            let mut visited = HS::with_capacity(5129); 
+            visited.insert((guard.coord, guard.direction)); 
 
-        loop {
-            if new_obstacles.contains(&guard.next()) {
-                guard.turn();
-            } else {
-                guard.step();
-                if guard.coord.0 >= 0
-                    && guard.coord.0 <= dim_x
-                    && guard.coord.1 >= 0
-                    && guard.coord.1 <= dim_y
-                {
-                    let entry = (guard.coord, guard.direction);
-                    if visited.contains(&entry) {
-                        loop_counter += 1;
-                        break;
-                    } else {
-                        visited.insert(entry);
-                    }
-                    visited.insert((guard.coord, guard.direction));
+            loop {
+                if obstacles.contains(&guard.next()) || &guard.next() == new_obs {
+                    guard.turn();
                 } else {
-                    break;
+                    guard.step();
+                    if guard.coord.0 >= 0
+                        && guard.coord.0 <= dim_x
+                        && guard.coord.1 >= 0
+                        && guard.coord.1 <= dim_y
+                    {
+                        let entry = (guard.coord, guard.direction);
+                        if visited.contains(&entry) {
+                            return true;
+                        } else {
+                            visited.insert(entry);
+                        }
+                        visited.insert((guard.coord, guard.direction));
+                    } else {
+                        break false;
+                    }
                 }
             }
-        }
-
-    }
-
-    loop_counter
+            
+        })
+        // count the ones that give loop
+        .count()
 }
 
 #[cfg(test)]
