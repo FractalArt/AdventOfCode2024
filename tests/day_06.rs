@@ -1,5 +1,7 @@
+#[cfg(not(debug_assertions))]
 use aoc2024::{self, read_data};
 
+#[cfg(not(debug_assertions))]
 #[test]
 fn test_day_06() {
     let data = read_data::<String, _>("data/day_06.txt").unwrap();

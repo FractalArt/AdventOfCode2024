@@ -151,6 +151,7 @@ mod tests {
         assert_eq!(part_1(&data), 41);
     }
 
+    #[cfg(not(debug_assertions))]
     #[test]
     fn test_part_2() {
         let data = [
