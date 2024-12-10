@@ -1,6 +1,5 @@
 use aoc2024::read_data;
 use colored::Colorize;
-use std::fs;
 
 fn main() {
     // day 06

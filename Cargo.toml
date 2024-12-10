@@ -8,3 +8,11 @@ itertools = "0.13"
 regex = "1"
 colored = "2"
 rayon = "1"
+
+[dev-dependencies]
+# `cargo install cargo-criterion && cargo criterion`
+criterion = "0.1"
+
+[[example]]
+name = "day_06_part2"
+

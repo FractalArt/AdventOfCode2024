@@ -12,6 +12,7 @@ My solutions to the [AOC 2024](https://adventofcode.com/2024) problems in [Rust]
 |  4 | :heavy_check_mark: | :heavy_check_mark: |  
 |  5 | :heavy_check_mark: | :heavy_check_mark: |  
 |  6 | :heavy_check_mark: | :heavy_check_mark: |  
+|  7 | :heavy_check_mark: | :x: |  
 
 ***
 
@@ -31,4 +32,20 @@ All the puzzle answers can be shown by running the code in `src/main.rs` through
 
 ```sh
 > cargo r --release
+```
+
+## Benchmarking
+
+`Criterion` is used for benchmarking.
+
+It can be installed by running the command:
+
+```sh
+> cargo install cargo-criterion
+```
+
+Then the benchmarks can be run using:
+
+```sh
+> cargo criterion
 ```
