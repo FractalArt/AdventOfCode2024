@@ -67,10 +67,10 @@ fn main() {
     let data = read_data::<String, _>("data/day_07.txt").unwrap();
     println!(
         "[Day 07 - Task 1]: {}",
-        format!("{}", aoc2024::day_07::part_1(&data)).green()
+        format!("{}", aoc2024::day_07::part_1_2(&data, &['+', '*'])).green()
     );
-    //println!(
-    //"[Day 07 - Task 2]: {}",
-    //format!("{}", aoc2024::day_07::part_2(&data)).green()
-    //);
+    println!(
+        "[Day 07 - Task 2]: {}",
+        format!("{}", aoc2024::day_07::part_1_2(&data, &['+', '*', '|'])).green()
+    );
 }
