@@ -1,6 +1,6 @@
 //! # Advent of Code 2024 - Day 7
 //!
-//! This module contains the solution of the [sixth day's challenges](https://adventofcode.com/2024/day/6).
+//! This module contains the solution of the [seventh day's challenges](https://adventofcode.com/2024/day/7).
 use itertools::Itertools;
 use rayon::prelude::*;
 
