@@ -2,7 +2,6 @@
 //!
 //! This module contains the solution of the [eigth day's challenges](https://adventofcode.com/2024/day/8).
 use itertools::Itertools;
-//use rayon::prelude::*;
 use std::collections::{HashMap as HM, HashSet as HS};
 
 type Coord = (isize, isize);
