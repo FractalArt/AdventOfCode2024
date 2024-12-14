@@ -83,4 +83,15 @@ fn main() {
         "[Day 08 - Task 2]: {}",
         format!("{}", aoc2024::day_08::part_2(&data)).green()
     );
+    // day 09
+    let data = std::fs::read_to_string("data/day_09.txt").unwrap();
+    let data = data.trim();
+    println!(
+        "[Day 09 - Task 1]: {}",
+        format!("{}", aoc2024::day_09::part_1(data)).green()
+    );
+    //println!(
+        //"[Day 09 - Task 2]: {}",
+        //format!("{}", aoc2024::day_09::part_2(data)).green()
+    //);
 }
