@@ -43,6 +43,43 @@ pub fn part_1(data: &[String]) -> usize {
         .len()
 }
 
+/// The solution to task 2 of day 8.
+pub fn part_2(data: &[String]) -> usize {
+    parse(data)
+        .into_iter()
+        .fold(HS::new(), |mut antinodes, (_, antennas)| {
+            antennas.into_iter().combinations(2).for_each(|pair| {
+                let a1 = pair[0];
+                let a2 = pair[1];
+                let dir = (a2.0 - a1.0, a2.1 - a1.1);
+                let gcd = num::integer::gcd(dir.0, dir.1);
+                let dir =  (dir.0 / gcd, dir.1 / gcd);
+                let mut start = a1;
+                loop {
+                    antinodes.insert(start);
+                    start = (start.0 + dir.0, start.1 + dir.1);
+                    if start.0 < 0 || start.1 < 0 || start.0 >= data.len() as isize || start.1 >= data.len() as isize {
+                        break
+                    }
+                }
+                start = a1;
+                loop {
+                    antinodes.insert(start);
+                    start = (start.0 - dir.0, start.1 - dir.1);
+                    if start.0 < 0 || start.1 < 0 || start.0 >= data.len() as isize || start.1 >= data.len() as isize {
+                        break
+                    }
+                }
+
+            });
+
+            antinodes
+
+        })
+        .len()
+
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -92,10 +129,22 @@ mod tests {
         assert_eq!(part_1(&data), 14);
     }
 
-    //#[test]
-    //fn test_part_2() {
-    //let data = [
-    //];
-    //assert_eq!(part_1_2(&data, &['+', '*', '|']), 11387);
-    //}
+    #[test]
+    fn test_part_2() {
+    let data = [
+            "............".to_string(),
+            "........0...".to_string(),
+            ".....0......".to_string(),
+            ".......0....".to_string(),
+            "....0.......".to_string(),
+            "......A.....".to_string(),
+            "............".to_string(),
+            "............".to_string(),
+            "........A...".to_string(),
+            ".........A..".to_string(),
+            "............".to_string(),
+            "............".to_string(),
+    ];
+    assert_eq!(part_2(&data), 34);
+    }
 }
