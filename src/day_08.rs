@@ -48,36 +48,35 @@ pub fn part_2(data: &[String]) -> usize {
     parse(data)
         .into_iter()
         .fold(HS::new(), |mut antinodes, (_, antennas)| {
-            antennas.into_iter().combinations(2).for_each(|pair| {
-                let a1 = pair[0];
-                let a2 = pair[1];
-                let dir = (a2.0 - a1.0, a2.1 - a1.1);
+            antennas.into_iter().combinations(2).for_each(|v| {
+                let dir = (v[1].0 - v[0].0, v[1].1 - v[0].1);
                 let gcd = num::integer::gcd(dir.0, dir.1);
-                let dir =  (dir.0 / gcd, dir.1 / gcd);
-                let mut start = a1;
-                loop {
+                let dir = (dir.0 / gcd, dir.1 / gcd);
+                let mut start = v[0];
+                // Move into one direction along line connecting two antennas of same frequency
+                while start.0 >= 0
+                    && start.1 >= 0
+                    && (start.0 as usize) < data.len()
+                    && (start.1 as usize) < data.len()
+                {
                     antinodes.insert(start);
                     start = (start.0 + dir.0, start.1 + dir.1);
-                    if start.0 < 0 || start.1 < 0 || start.0 >= data.len() as isize || start.1 >= data.len() as isize {
-                        break
-                    }
                 }
-                start = a1;
-                loop {
+                // Move into other direction along line connecting two antennas of same frequency
+                start = v[0];
+                while start.0 >= 0
+                    && start.1 >= 0
+                    && (start.0 as usize) < data.len()
+                    && (start.1 as usize) < data.len()
+                {
                     antinodes.insert(start);
                     start = (start.0 - dir.0, start.1 - dir.1);
-                    if start.0 < 0 || start.1 < 0 || start.0 >= data.len() as isize || start.1 >= data.len() as isize {
-                        break
-                    }
                 }
-
             });
 
             antinodes
-
         })
         .len()
-
 }
 
 #[cfg(test)]
@@ -131,7 +130,7 @@ mod tests {
 
     #[test]
     fn test_part_2() {
-    let data = [
+        let data = [
             "............".to_string(),
             "........0...".to_string(),
             ".....0......".to_string(),
@@ -144,7 +143,7 @@ mod tests {
             ".........A..".to_string(),
             "............".to_string(),
             "............".to_string(),
-    ];
-    assert_eq!(part_2(&data), 34);
+        ];
+        assert_eq!(part_2(&data), 34);
     }
 }
