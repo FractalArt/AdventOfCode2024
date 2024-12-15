@@ -140,7 +140,7 @@ fn main() {
         format!("{:?}", start.elapsed()).blue(),
         format!("{}", part_2).green()
     );
-    
+
     // day 09
     let data = std::fs::read_to_string("data/day_09.txt").unwrap();
     let data = data.trim();
