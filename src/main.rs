@@ -168,13 +168,13 @@ fn main() {
         format!("{:?}", start.elapsed()).blue(),
         format!("{}", part_1).green()
     );
-    //let start = Instant::now();
-    //let part_2 = aoc2024::day_10::part_2(data);
-    //println!(
-        //"[Day 10 - Task 2][{:>15}]: {}",
-        //format!("{:?}", start.elapsed()).blue(),
-        //format!("{}", part_2).green()
-    //);
+    let start = Instant::now();
+    let part_2 = aoc2024::day_10::part_2(&data);
+    println!(
+        "[Day 10 - Task 2][{:>15}]: {}",
+        format!("{:?}", start.elapsed()).blue(),
+        format!("{}", part_2).green()
+    );
 
     println!(
         "\nTotal time taken: [{}]",
