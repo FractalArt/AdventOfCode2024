@@ -63,7 +63,7 @@ pub fn part_1(data: &[String]) -> usize {
         .sum()
 }
 
-/// The solution to task 2 of day 9.
+/// The solution to task 2 of day 10.
 pub fn part_2(data: &[String]) -> usize {
     // parse the map
     let map = parse_map(data);
