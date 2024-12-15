@@ -2,7 +2,6 @@
 //!
 //! This module contains the solution of the [tenth day's challenges](https://adventofcode.com/2024/day/10).
 use std::cmp::{max, min};
-use std::collections::{HashSet as HS, VecDeque as VD};
 
 fn parse_map(data: &[String]) -> Vec<Vec<i32>> {
     data.iter()
@@ -15,9 +14,9 @@ fn parse_map(data: &[String]) -> Vec<Vec<i32>> {
 }
 
 fn score(trailhead: (isize, isize), map: &[Vec<i32>], count_paths: bool) -> usize {
-    let mut todo = VD::new();
+    let mut todo = std::collections::VecDeque::new();
     todo.push_back(trailhead);
-    let mut reached_destinations = HS::new();
+    let mut reached_destinations = std::collections::HashSet::new();
     let mut path_count = 0;
 
     while let Some((x, y)) = todo.pop_back() {
