@@ -178,6 +178,7 @@ fn main() {
 
     // day 11
     let data = std::fs::read_to_string("data/day_11.txt").unwrap();
+    //let data = "125 17";
     let start = Instant::now();
     let part_1 = aoc2024::day_11::part_1_2(&data, 25);
     println!(
@@ -185,7 +186,7 @@ fn main() {
         format!("{:?}", start.elapsed()).blue(),
         format!("{}", part_1).green()
     );
-    let start = Instant::now();
+    //let start = Instant::now();
     //let part_2 = aoc2024::day_11::part_1_2(&data, 75);
     //println!(
         //"[Day 11 - Task 2][{:>15}]: {}",

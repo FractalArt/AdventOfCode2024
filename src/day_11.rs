@@ -1,32 +1,37 @@
 //! # Advent of Code 2024 - Day 11
 //!
 //! This module contains the solution of the [eleventh day's challenges](https://adventofcode.com/2024/day/11).
+use itertools::Itertools;
 
 /// The solution to task 1 of day 11.
 pub fn part_1_2(data: &str, blinks: usize) -> usize {
-    let mut data: Vec<usize> = data.split_whitespace()
+    let mut counts = data
+        .split_whitespace()
         .map(|n| n.parse::<usize>().unwrap())
-        .collect();
+        .counts();
 
-    for _ in 1..=blinks {
-       data = data.into_iter()
-           .flat_map(|x| {
+    for blink in 1..=blinks {
+        println!("blink: {blink}");
+        counts = counts
+            .into_iter()
+            .flat_map(|(x, count)| {
                 let str = format!("{x}");
                 match x {
-                    0 => vec![1].into_iter(),
-                    _ if str.len() % 2 == 0 => {
-                        vec![
-                            str[0..str.len() / 2].parse::<usize>().unwrap(),
-                            str[str.len() / 2..].parse::<usize>().unwrap(),
-                        ].into_iter()
-                    },
-                    _ => vec![2024 * x].into_iter(),
+                    0 => vec![1].into_iter().cycle().take(count),
+                    _ if str.len() % 2 == 0 => vec![
+                        str[0..str.len() / 2].parse::<usize>().unwrap(),
+                        str[str.len() / 2..].parse::<usize>().unwrap(),
+                    ]
+                    .into_iter()
+                    .cycle()
+                    .take(count * 2),
+                    _ => vec![2024 * x].into_iter().cycle().take(count),
                 }
-           }).collect();
+            })
+            .counts();
     }
 
-    data.len()
-
+    counts.values().sum()
 }
 
 #[cfg(test)]
@@ -42,7 +47,7 @@ mod tests {
 
     //#[test]
     //fn test_part_2() {
-        //let data = "125 17";
-        //assert_eq!(part_2(data), 81);
+    //let data = "125 17";
+    //assert_eq!(part_2(data), 81);
     //}
 }
