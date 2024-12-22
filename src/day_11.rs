@@ -4,7 +4,7 @@
 use itertools::Itertools;
 use std::collections::HashMap as HM;
 
-/// The solution to task 1 of day 11.
+/// The solution to tasks 1 and 2 of day 11.
 pub fn part_1_2(data: &str, blinks: usize) -> usize {
     let mut counts = data
         .split_whitespace()
