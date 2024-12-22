@@ -16,7 +16,7 @@ My solutions to the [AOC 2024](https://adventofcode.com/2024) problems in [Rust]
 |  8 | :heavy_check_mark: | :heavy_check_mark: |  
 |  9 | :heavy_check_mark: | :heavy_check_mark: |  
 | 10 | :heavy_check_mark: | :heavy_check_mark: |  
-| 11 | :heavy_check_mark: | :x: |  
+| 11 | :heavy_check_mark: | :heavy_check_mark: |  
 
 ***
 
