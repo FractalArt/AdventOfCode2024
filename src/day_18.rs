@@ -3,20 +3,7 @@
 //! This module contains the solution of the [eighteenth day's challenges](https://adventofcode.com/2024/day/18).
 use std::collections::{HashSet as HS, VecDeque as VD};
 
-/// The solution to tasks 1 and 2 of day 11.
-pub fn part_1(data: &[String], n_bytes: usize, max: isize) -> Option<usize> {
-    let corrupted = data
-        .iter()
-        .map(|line| {
-            let mut split = line.split(',');
-            (
-                split.next().unwrap().parse::<isize>().unwrap(),
-                split.next().unwrap().parse::<isize>().unwrap(),
-            )
-        })
-        .take(n_bytes)
-        .collect::<HS<_>>();
-
+fn simulate(corrupted: &HS<(isize, isize)>, max: isize) -> Option<usize> {
     let mut visited = HS::new();
     let mut todo: VD<_> = [((0, 0), 0)].into_iter().collect();
 
@@ -38,6 +25,47 @@ pub fn part_1(data: &[String], n_bytes: usize, max: isize) -> Option<usize> {
     }
 
     None
+}
+
+/// The solution to task 1 of day 18.
+pub fn part_1(data: &[String], n_bytes: usize, max: isize) -> Option<usize> {
+    let corrupted = data
+        .iter()
+        .map(|line| {
+            let mut split = line.split(',');
+            (
+                split.next().unwrap().parse::<isize>().unwrap(),
+                split.next().unwrap().parse::<isize>().unwrap(),
+            )
+        })
+        .take(n_bytes)
+        .collect::<HS<_>>();
+
+    simulate(&corrupted, max)
+}
+
+/// The solution to task 2 of day 18.
+pub fn part_2(data: &[String], max: isize) -> (isize, isize) {
+    let corrupted = data
+        .iter()
+        .map(|line| {
+            let mut split = line.split(',');
+            (
+                split.next().unwrap().parse::<isize>().unwrap(),
+                split.next().unwrap().parse::<isize>().unwrap(),
+            )
+        })
+        .collect::<Vec<_>>();
+
+    (1..corrupted.len())
+        .find_map(|i| {
+            let hs = corrupted.iter().copied().take(i).collect();
+            match simulate(&hs, max) {
+                None => Some(corrupted[i - 1]),
+                _ => None,
+            }
+        })
+        .unwrap()
 }
 
 #[cfg(test)]
@@ -74,5 +102,37 @@ mod tests {
             "2,0".to_string(),
         ];
         assert_eq!(part_1(&data, 12, 6), Some(22));
+    }
+
+    #[test]
+    fn test_part_2() {
+        let data = [
+            "5,4".to_string(),
+            "4,2".to_string(),
+            "4,5".to_string(),
+            "3,0".to_string(),
+            "2,1".to_string(),
+            "6,3".to_string(),
+            "2,4".to_string(),
+            "1,5".to_string(),
+            "0,6".to_string(),
+            "3,3".to_string(),
+            "2,6".to_string(),
+            "5,1".to_string(),
+            "1,2".to_string(),
+            "5,5".to_string(),
+            "2,5".to_string(),
+            "6,5".to_string(),
+            "1,4".to_string(),
+            "0,4".to_string(),
+            "6,4".to_string(),
+            "1,1".to_string(),
+            "6,1".to_string(),
+            "1,0".to_string(),
+            "0,5".to_string(),
+            "1,6".to_string(),
+            "2,0".to_string(),
+        ];
+        assert_eq!(part_2(&data, 6), (6, 1));
     }
 }
