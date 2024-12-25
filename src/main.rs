@@ -194,6 +194,23 @@ fn main() {
         format!("{}", part_2).green()
     );
 
+    // day 14
+    let data = read_data::<String, _>("data/day_14.txt").unwrap();
+    let start = Instant::now();
+    let part_1 = aoc2024::day_14::part_1(&data, 100, 101, 103);
+    println!(
+        "[Day 14 - Task 1][{:>15}]: {}",
+        format!("{:?}", start.elapsed()).blue(),
+        format!("{}", part_1).green()
+    );
+    //let start = Instant::now();
+    //let part_2 = aoc2024::day_14::part_2(&data, 70);
+    //println!(
+        //"[Day 14 - Task 2][{:>15}]: {}",
+        //format!("{:?}", start.elapsed()).blue(),
+        //format!("({}, {})", part_2.0, part_2.1).green()
+    //);
+
     // day 18
     let data = read_data::<String, _>("data/day_18.txt").unwrap();
     let start = Instant::now();

@@ -21,6 +21,7 @@ pub mod day_08;
 pub mod day_09;
 pub mod day_10;
 pub mod day_11;
+pub mod day_14;
 pub mod day_18;
 
 /// Read the data from the input file.
