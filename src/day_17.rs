@@ -77,7 +77,6 @@ impl State {
     }
 }
 
-
 /// The solution to task 1 of day 17.
 pub fn part_1(program: Vec<usize>, ra: usize, rb: usize, rc: usize) -> String {
     let mut state = State {
@@ -96,6 +95,62 @@ pub fn part_1(program: Vec<usize>, ra: usize, rb: usize, rc: usize) -> String {
     state.out.join(",")
 }
 
+/// The solution to task 2 of day 17.
+///
+/// Converting the program code of the input:
+/// 2,4,1,5,7,5,1,6,0,3,4,3,5,5,3,0
+/// to assembly code, one gets:
+///
+/// BST 4;  B = COMBO(4) % 8 = A % 8
+/// BXL 5;  B = B ^ 5 = (A % 8) ^ 5
+/// CDV 5;  C = A / 2**(COMBO(5)) = A / 2**B = A / 2**(A%8 ^ 5)
+/// BXL 6;  B = B ^ 6 = (A % 8) ^ 5 ^ 6 = (A % 8) ^ 3
+/// ADV 3;  A = A / 2 ** (COMBO(3)) = A / 2**3 = A / 8
+/// BXC 3;  B = B ^ C = (A % 8) ^ 3 ^ A / 2**(A%8 ^ 5)
+/// OUT 5;  COMBO(5) % 8 = B % 8 = ((A % 8) ^ 3 ^ A / 2**((A%8) ^ 5)) % 8
+///
+/// The reversed function output for a given initial A register value
+/// is thus 
+///
+/// ((A % 8) ^ 3 ^ A / 2**(A % 8) ^ 5) % 8
+///
+/// Notice that for the example input from the problem, the reversed function
+/// is simply:
+///
+/// (A / 8) % 8
+///
+/// This program has the nice property that the output value only depends
+/// on the initial register entry A in every iteration.
+/// The jump only occurs at the end, so we have an iterative function.
+/// The current iteration depends on the value of the A register at the
+/// end of the previous iteration.
+///
+/// We can see that in every iteration, A is decreased by a factor 8 (A / 3).
+/// We thus need to find the smallest value of A that gives 0 in one iteration.
+/// This is the last A value that will end the program.
+/// From there we start at A * 8 and find the value of A that gives the second but last program
+/// program byte.
+/// Then we iterate until we find the value of A that yields the first program byte.
+/// This is the return value.
+pub fn part_2<F>(program: Vec<usize>, reversed: F) -> usize
+where
+    F: Fn(usize) -> usize,
+{
+    program
+        .into_iter()
+        .rev()
+        .scan(0, |start, target| loop {
+            if reversed(*start) == target {
+                *start *= 8;
+                return Some(*start / 8);
+            } else {
+                *start += 1;
+            }
+        })
+        .last()
+        .unwrap()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -106,5 +161,14 @@ mod tests {
             part_1(vec![0, 1, 5, 4, 3, 0], 729, 0, 0),
             "4,6,3,5,6,3,5,2,1,0".to_string()
         );
+        assert_eq!(
+            part_1(vec![0, 3, 5, 4, 3, 0], 117440, 0, 0),
+            "0,3,5,4,3,0".to_string()
+        );
+    }
+
+    #[test]
+    fn test_part_2() {
+        assert_eq!(part_2(vec![0, 3, 5, 4, 3, 0], |a| (a / 8) % 8), 117440);
     }
 }
