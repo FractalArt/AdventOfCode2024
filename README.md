@@ -52,18 +52,4 @@ All the puzzle answers can be shown by running the code in `src/main.rs` through
 > cargo r --release
 ```
 
-## Benchmarking
 
-`Criterion` is used for benchmarking.
-
-It can be installed by running the command:
-
-```sh
-> cargo install cargo-criterion
-```
-
-Then the benchmarks can be run using:
-
-```sh
-> cargo criterion
-```
