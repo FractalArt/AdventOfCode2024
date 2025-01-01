@@ -9,6 +9,7 @@ regex = "1"
 colored = "2"
 rayon = "1"
 num = "0.4"
+ndarray = "0.16"
 
 [[example]]
 name = "day_06_part2"

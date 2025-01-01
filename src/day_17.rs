@@ -110,7 +110,7 @@ pub fn part_1(program: Vec<usize>, ra: usize, rb: usize, rc: usize) -> String {
 /// OUT 5;  COMBO(5) % 8 = B % 8 = ((A % 8) ^ 3 ^ A / 2**((A%8) ^ 5)) % 8
 ///
 /// The reversed function output for a given initial A register value
-/// is thus 
+/// is thus
 ///
 /// ((A % 8) ^ 3 ^ A / 2**(A % 8) ^ 5) % 8
 ///

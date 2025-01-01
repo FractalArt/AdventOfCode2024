@@ -253,6 +253,16 @@ fn main() {
         format!("({}, {})", part_2.0, part_2.1).green()
     );
 
+    // day 25
+    let data = std::fs::read_to_string("data/day_25.txt").unwrap();
+    let start = Instant::now();
+    let part_1 = aoc2024::day_25::part_1(&data);
+    println!(
+        "[Day 25 - Task 1][{:>15}]: {}",
+        format!("{:?}", start.elapsed()).blue(),
+        format!("{}", part_1).green()
+    );
+
     // Overall
     println!(
         "\nTotal time taken: [{}]",
