@@ -29,7 +29,7 @@ My solutions to the [AOC 2024](https://adventofcode.com/2024) problems in [Rust]
 | 21 | :x: | :x: |  
 | 22 | :x: | :x: |  
 | 23 | :x: | :x: |  
-| 24 | :x: | :x: |  
+| 24 | :heavy_check_mark: | :x: |  
 | 25 | :heavy_check_mark: | :christmas_tree: |  
 
 ***
