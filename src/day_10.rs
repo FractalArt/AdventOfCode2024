@@ -55,7 +55,7 @@ pub fn part_1(data: &[String]) -> usize {
         .flat_map(|(y, line)| {
             line.iter()
                 .enumerate()
-                .filter(|(_, &n)| n == 0)
+                .filter(|&(_, &n)| n == 0)
                 .map(move |(x, _)| (x as isize, y as isize))
         })
         // for each trailhead compute the score by counting the number of 9s that can be reached
@@ -73,7 +73,7 @@ pub fn part_2(data: &[String]) -> usize {
         .flat_map(|(y, line)| {
             line.iter()
                 .enumerate()
-                .filter(|(_, &n)| n == 0)
+                .filter(|&(_, &n)| n == 0)
                 .map(move |(x, _)| (x as isize, y as isize))
         })
         // for each trailhead identify the score by counting the number of trails
